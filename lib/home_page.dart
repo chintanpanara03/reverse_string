@@ -19,17 +19,23 @@ class _MyHomePageState extends State<MyHomePage> {
       reversedString.clear();
       int mainWord = int.parse(lastWord);
       setState(() {
-        var def = mainString.split('.');
-        def.removeLast();
+        print(mainString);
+        var def = mainString.split(RegExp(r"(?<=[.?!])")).toList();
+        //def.removeLast();
         for (int i = 0; i < def.length; i++) {
           String ghi = def[i];
           var jkl = ghi.trim().split(' ');
-          var mno = jkl.length - mainWord;
-          var stringOne = jkl.sublist(0, mno);
-          var stringTwo = jkl.sublist(mno).join(' ');
-          var reversest = stringOne.reversed.join(' ');
-          String pqr = '$reversest $stringTwo';
-          reversedString.add(pqr);
+          if (jkl.length >= mainWord) {
+            var mno = jkl.length - mainWord;
+            var stringOne = jkl.sublist(0, mno);
+            var stringTwo = jkl.sublist(mno).join(' ');
+            var reversest = stringOne.reversed.join(' ');
+            String pqr = '$reversest $stringTwo';
+            reversedString.add(pqr);
+          } else {
+            String asd = jkl.join(' ');
+            reversedString.add(asd);
+          }
         }
       });
     }
@@ -104,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('${reversedString.join('. ').trim()}'),
+                    child: Text('${reversedString.join(' ')}'),
                   ),
                 ],
               ),
